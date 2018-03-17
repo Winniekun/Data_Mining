@@ -16,21 +16,22 @@
 
 ## 实现的经典数据挖掘算法
 
-* [ ] Apriori
-      1. 首先设置阀值
-      2. 构建一个1-项集（单列）列表，该列表称为CandidateSingletonList
-         * 为此，从每种可能项目的列表开始，该列表称为CandidateSingletonList
-         * 计算CandidateSingletonList中每个单独项目的支持度
-         * 仅保留符合支持阀值的单列，并将其加入SingletonList列表中
-      3. 构造一个2-项集（双个体集）
-         * 为此，从SingletonList入手
-         * 建立SingletonList中项目的所有可能配对的列表，这个列表称作为CandidateDoubleton-List。
-         * 仅保留符合支持阀值的候选二元组，将其添加到列表DoubletonList中
-      4. 构建3-项集（三个体集）列表
-         * 为此，从DoubletonList入手
-         * 建立DoubletonList中出现的每个可能单项的列表，将其与DoubletonList中的每个项目匹配，建立三元组。这个列表称为CandidateTripleList
-         * 仅保留符合支持阀值的候选三元组，将其添加到列表TripletonList中
-      5. 重复第4步，用前面构建的列表中的单项生成n-项集，直到频繁集用完
+### Apriori
+
+1. 首先设置阀值
+2. 构建一个1-项集（单列）列表，该列表称为CandidateSingletonList
+   * 为此，从每种可能项目的列表开始，该列表称为CandidateSingletonList
+   * 计算CandidateSingletonList中每个单独项目的支持度
+   * 仅保留符合支持阀值的单列，并将其加入SingletonList列表中
+3. 构造一个2-项集（双个体集）
+   * 为此，从SingletonList入手
+   * 建立SingletonList中项目的所有可能配对的列表，这个列表称作为CandidateDoubleton-List。
+   * 仅保留符合支持阀值的候选二元组，将其添加到列表DoubletonList中
+4. 构建3-项集（三个体集）列表
+   * 为此，从DoubletonList入手
+   * 建立DoubletonList中出现的每个可能单项的列表，将其与DoubletonList中的每个项目匹配，建立三元组。这个列表称为CandidateTripleList
+   * 仅保留符合支持阀值的候选三元组，将其添加到列表TripletonList中
+5. 重复第4步，用前面构建的列表中的单项生成n-项集，直到频繁集用完
 
 
 
@@ -40,4 +41,3 @@
 
 
 * [ ] Pyspark使用
-
