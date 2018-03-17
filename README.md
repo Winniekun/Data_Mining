@@ -31,3 +31,13 @@
          * 建立DoubletonList中出现的每个可能单项的列表，将其与DoubletonList中的每个项目匹配，建立三元组。这个列表称为CandidateTripleList
          * 仅保留符合支持阀值的候选三元组，将其添加到列表TripletonList中
       5. 重复第4步，用前面构建的列表中的单项生成n-项集，直到频繁集用完
+
+
+
+## 预测分析
+
+* [x] 电影数据EDA 
+
+
+* [ ] Pyspark使用
+
