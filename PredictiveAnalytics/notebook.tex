@@ -1,0 +1,1124 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{movie}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{imdb\PYZus{}ratings} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/PA\PYZus{}chapter2\PYZus{}data/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{c+c1}{\PYZsh{}头部　默认前５行}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    Unnamed: 0                     title  year  length  budget  rating  votes  \textbackslash{}
+        0           1                         \$  1971     121     NaN     6.4    348   
+        1           2         \$1000 a Touchdown  1939      71     NaN     6.0     20   
+        2           3    \$21 a Day Once a Month  1941       7     NaN     8.2      5   
+        3           4                   \$40,000  1996      70     NaN     8.2      6   
+        4           5  \$50,000 Climax Show, The  1975      71     NaN     3.4     17   
+        
+             r1    r2   r3  {\ldots}      r9   r10  mpaa  Action  Animation  Comedy  Drama  \textbackslash{}
+        0   4.5   4.5  4.5  {\ldots}     4.5   4.5   NaN       0          0       1      1   
+        1   0.0  14.5  4.5  {\ldots}     4.5  14.5   NaN       0          0       1      0   
+        2   0.0   0.0  0.0  {\ldots}    24.5  24.5   NaN       0          1       0      0   
+        3  14.5   0.0  0.0  {\ldots}    34.5  45.5   NaN       0          0       1      0   
+        4  24.5   4.5  0.0  {\ldots}     0.0  24.5   NaN       0          0       0      0   
+        
+          Documentary  Romance  Short  
+        0           0        0      0  
+        1           0        0      0  
+        2           0        0      1  
+        3           0        0      0  
+        4           0        0      0  
+        
+        [5 rows x 25 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}\PY{c+c1}{\PYZsh{}尾部}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}        Unnamed: 0                    title  year  length      budget  rating  \textbackslash{}
+        58773       58774              deadend.com  2002     120         NaN     6.9   
+        58774       58775                 e-Dreams  2001      94         NaN     6.8   
+        58775       58776                    eMale  2001      17         NaN     7.3   
+        58776       58777                eRATicate  2003       9         NaN     6.0   
+        58777       58778             eXXXorcismos  2002      78         NaN     4.2   
+        58778       58779                 eXistenZ  1999      97         NaN     6.7   
+        58779       58780                 f2point8  2002      20         NaN     5.0   
+        58780       58781                       f8  2001      13         NaN     7.6   
+        58781       58782             pURe kILLjoy  1998      87         NaN     5.2   
+        58782       58783                   sIDney  2002      15         NaN     7.0   
+        58783       58784                tom thumb  1958      98         NaN     6.5   
+        58784       58785              www.XXX.com  2003     105         NaN     1.1   
+        58785       58786   www.hellssoapopera.com  1999     100         NaN     6.6   
+        58786       58787                      xXx  2002     132  85000000.0     5.5   
+        58787       58788  xXx: State of the Union  2005     101  87000000.0     3.9   
+        
+               votes    r1    r2    r3  {\ldots}      r9   r10   mpaa  Action  Animation  \textbackslash{}
+        58773     53  64.5   4.5   0.0  {\ldots}     4.5   4.5    NaN       0          0   
+        58774     86   4.5   0.0   0.0  {\ldots}     4.5  14.5    NaN       0          0   
+        58775     15   0.0   0.0   0.0  {\ldots}    24.5  24.5    NaN       0          0   
+        58776      5   0.0   0.0   0.0  {\ldots}    24.5  44.5    NaN       0          0   
+        58777     11  34.5   0.0   0.0  {\ldots}     4.5  24.5    NaN       0          0   
+        58778  14742   4.5   4.5   4.5  {\ldots}    14.5   4.5      R       0          0   
+        58779     13   4.5   0.0   4.5  {\ldots}    14.5  24.5    NaN       0          0   
+        58780      7   0.0   0.0   0.0  {\ldots}    24.5   0.0    NaN       0          1   
+        58781      6   0.0  14.5  14.5  {\ldots}     0.0  14.5    NaN       0          0   
+        58782      8  14.5   0.0   0.0  {\ldots}    14.5  24.5    NaN       1          0   
+        58783    274   4.5   4.5   4.5  {\ldots}     4.5   4.5    NaN       0          1   
+        58784     12  45.5   0.0   0.0  {\ldots}     0.0  24.5    NaN       0          0   
+        58785      5  24.5   0.0  24.5  {\ldots}    24.5  44.5    NaN       0          0   
+        58786  18514   4.5   4.5   4.5  {\ldots}     4.5   4.5  PG-13       1          0   
+        58787   1584  24.5   4.5   4.5  {\ldots}     4.5  14.5  PG-13       1          0   
+        
+               Comedy  Drama Documentary  Romance  Short  
+        58773       0      1           0        0      0  
+        58774       0      0           1        0      0  
+        58775       1      0           0        0      1  
+        58776       1      0           0        0      1  
+        58777       0      1           0        0      0  
+        58778       0      1           0        0      0  
+        58779       0      0           0        0      1  
+        58780       0      0           0        0      1  
+        58781       0      0           0        0      0  
+        58782       0      0           0        0      1  
+        58783       0      0           0        0      0  
+        58784       0      1           0        1      0  
+        58785       0      0           0        0      0  
+        58786       0      0           0        0      0  
+        58787       0      0           0        0      0  
+        
+        [15 rows x 25 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{c+c1}{\PYZsh{}详细信息描述}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}         Unnamed: 0          year        length        budget        rating  \textbackslash{}
+        count  58788.00000  58788.000000  58788.000000  5.215000e+03  58788.000000   
+        mean   29394.50000   1976.133582     82.337875  1.341251e+07      5.932850   
+        std    16970.77815     23.735125     44.347717  2.335008e+07      1.553031   
+        min        1.00000   1893.000000      1.000000  0.000000e+00      1.000000   
+        25\%    14697.75000   1958.000000     74.000000  2.500000e+05      5.000000   
+        50\%    29394.50000   1983.000000     90.000000  3.000000e+06      6.100000   
+        75\%    44091.25000   1997.000000    100.000000  1.500000e+07      7.000000   
+        max    58788.00000   2005.000000   5220.000000  2.000000e+08     10.000000   
+        
+                       votes            r1            r2            r3            r4  \textbackslash{}
+        count   58788.000000  58788.000000  58788.000000  58788.000000  58788.000000   
+        mean      632.130384      7.014382      4.022377      4.721159      6.374847   
+        std      3829.621413     10.936759      5.960056      6.451629      7.586141   
+        min         5.000000      0.000000      0.000000      0.000000      0.000000   
+        25\%        11.000000      0.000000      0.000000      0.000000      0.000000   
+        50\%        30.000000      4.500000      4.500000      4.500000      4.500000   
+        75\%       112.000000      4.500000      4.500000      4.500000      4.500000   
+        max    157608.000000    100.000000     84.500000     84.500000    100.000000   
+        
+                   {\ldots}                 r8            r9           r10        Action  \textbackslash{}
+        count      {\ldots}       58788.000000  58788.000000  58788.000000  58788.000000   
+        mean       {\ldots}          13.875995      8.954208     16.854018      0.079744   
+        std        {\ldots}          11.316963      9.440597     15.650722      0.270899   
+        min        {\ldots}           0.000000      0.000000      0.000000      0.000000   
+        25\%        {\ldots}           4.500000      4.500000      4.500000      0.000000   
+        50\%        {\ldots}          14.500000      4.500000     14.500000      0.000000   
+        75\%        {\ldots}          24.500000     14.500000     24.500000      0.000000   
+        max        {\ldots}         100.000000    100.000000    100.000000      1.000000   
+        
+                  Animation        Comedy         Drama   Documentary       Romance  \textbackslash{}
+        count  58788.000000  58788.000000  58788.000000  58788.000000  58788.000000   
+        mean       0.062768      0.293784      0.371011      0.059060      0.080697   
+        std        0.242547      0.455498      0.483080      0.235738      0.272371   
+        min        0.000000      0.000000      0.000000      0.000000      0.000000   
+        25\%        0.000000      0.000000      0.000000      0.000000      0.000000   
+        50\%        0.000000      0.000000      0.000000      0.000000      0.000000   
+        75\%        0.000000      1.000000      1.000000      0.000000      0.000000   
+        max        1.000000      1.000000      1.000000      1.000000      1.000000   
+        
+                      Short  
+        count  58788.000000  
+        mean       0.160883  
+        std        0.367426  
+        min        0.000000  
+        25\%        0.000000  
+        50\%        0.000000  
+        75\%        0.000000  
+        max        1.000000  
+        
+        [8 rows x 23 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{columns}\PY{c+c1}{\PYZsh{}访问列名}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} Index(['Unnamed: 0', 'title', 'year', 'length', 'budget', 'rating', 'votes',
+               'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'mpaa',
+               'Action', 'Animation', 'Comedy', 'Drama', 'Documentary', 'Romance',
+               'Short'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{dtypes}\PY{c+c1}{\PYZsh{}列的数据类型}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Unnamed: 0       int64
+        title           object
+        year             int64
+        length           int64
+        budget         float64
+        rating         float64
+        votes            int64
+        r1             float64
+        r2             float64
+        r3             float64
+        r4             float64
+        r5             float64
+        r6             float64
+        r7             float64
+        r8             float64
+        r9             float64
+        r10            float64
+        mpaa            object
+        Action           int64
+        Animation        int64
+        Comedy           int64
+        Drama            int64
+        Documentary      int64
+        Romance          int64
+        Short            int64
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}访问某一列的数据　也可以使用imdb.ratings[\PYZsq{}year\PYZsq{}].head()}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0    1971
+        1    1939
+        2    1941
+        3    1996
+        4    1975
+        Name: year, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算每年发行多少部电影}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 2002    2168
+        2003    2158
+        2001    2121
+        2000    2048
+        2004    1945
+        1999    1927
+        1998    1705
+        1997    1568
+        1996    1390
+        1995    1248
+        1994    1199
+        1993    1016
+        1987     957
+        1992     948
+        1989     944
+        1988     944
+        1990     899
+        1991     888
+        1985     792
+        1986     792
+        1984     749
+        1983     698
+        1982     689
+        1980     681
+        1976     665
+        1981     661
+        1968     651
+        1971     646
+        1972     637
+        1973     634
+                {\ldots} 
+        1921      53
+        1922      52
+        1919      52
+        1924      50
+        1916      49
+        1923      48
+        1920      43
+        1904      42
+        1918      41
+        1917      37
+        1903      37
+        1912      34
+        1913      32
+        1909      30
+        1901      28
+        1910      26
+        1908      24
+        1911      22
+        1906      17
+        1905      17
+        1900      16
+        1896      13
+        1907      12
+        1894       9
+        1897       9
+        1899       9
+        1902       9
+        1898       5
+        1895       3
+        1893       1
+        Name: year, Length: 113, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{}sort\PYZus{}index()用于对结果按照索引排序}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 2005     349
+        2004    1945
+        2003    2158
+        2002    2168
+        2001    2121
+        2000    2048
+        1999    1927
+        1998    1705
+        1997    1568
+        1996    1390
+        1995    1248
+        1994    1199
+        1993    1016
+        1992     948
+        1991     888
+        1990     899
+        1989     944
+        1988     944
+        1987     957
+        1986     792
+        1985     792
+        1984     749
+        1983     698
+        1982     689
+        1981     661
+        1980     681
+        1979     632
+        1978     609
+        1977     617
+        1976     665
+                {\ldots} 
+        1922      52
+        1921      53
+        1920      43
+        1919      52
+        1918      41
+        1917      37
+        1916      49
+        1915      54
+        1914      54
+        1913      32
+        1912      34
+        1911      22
+        1910      26
+        1909      30
+        1908      24
+        1907      12
+        1906      17
+        1905      17
+        1904      42
+        1903      37
+        1902       9
+        1901      28
+        1900      16
+        1899       9
+        1898       5
+        1897       9
+        1896      13
+        1895       3
+        1894       9
+        1893       1
+        Name: year, Length: 113, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{imdb\PYZus{}ratings}\PY{p}{[}\PY{p}{(}\PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{year} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1999}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{mpaa} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}逻辑切片　类似数据库查询语句　}
+         \PY{c+c1}{\PYZsh{} 找出１９９９年以后发行的且评级为Ｒ的所有电影子集}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}      Unnamed: 0          title  year  length     budget  rating  votes    r1  \textbackslash{}
+         6             7        \$windle  2002      93        NaN     5.3    200   4.5   
+         42           43        'R Xmas  2001      83        NaN     4.9    288  14.5   
+         122         123      100 Girls  2000      90        NaN     5.8   3349   4.5   
+         123         124  100 Mile Rule  2002      98  1100000.0     5.6    181   4.5   
+         152         153          11:11  2004      95        NaN     4.3    222  14.5   
+         
+                r2   r3  {\ldots}     r9   r10  mpaa  Action  Animation  Comedy  Drama  \textbackslash{}
+         6     0.0  4.5  {\ldots}    4.5  14.5     R       1          0       0      1   
+         42    4.5  4.5  {\ldots}    4.5   4.5     R       0          0       0      1   
+         122   4.5  4.5  {\ldots}    4.5   4.5     R       0          0       1      0   
+         123   4.5  4.5  {\ldots}    4.5  14.5     R       0          0       1      0   
+         152  14.5  4.5  {\ldots}    4.5  14.5     R       0          0       0      0   
+         
+             Documentary  Romance  Short  
+         6             0        0      0  
+         42            0        0      0  
+         122           0        1      0  
+         123           0        0      0  
+         152           0        0      0  
+         
+         [5 rows x 25 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{aggregate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{]}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{} 按照任何一列分组　并通过aggregate命令传入一个计算数组来计算他们的聚合统计信息}
+         \PY{c+c1}{\PYZsh{} numpy中的均值和标准差来找出某个特定的年份所发行的电影评级的平均值和标准差}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}           mean       std
+         year                    
+         1893  7.000000       NaN
+         1894  4.888889  0.727056
+         1895  5.500000  0.624500
+         1896  5.269231  1.325635
+         1897  4.677778  0.732765
+         1898  5.040000  0.950263
+         1899  4.277778  0.713754
+         1900  4.731250  1.358783
+         1901  4.682143  1.081513
+         1902  4.900000  1.615549
+         1903  4.808108  1.334662
+         1904  4.223810  1.291588
+         1905  5.047059  1.196410
+         1906  5.676471  1.274034
+         1907  5.383333  1.138447
+         1908  4.912500  1.086803
+         1909  5.126667  1.067363
+         1910  5.211538  0.832503
+         1911  5.881818  1.253048
+         1912  6.400000  0.984116
+         1913  6.665625  1.067892
+         1914  6.088889  1.106868
+         1915  6.246296  1.089697
+         1916  6.632653  1.247729
+         1917  6.751351  1.115452
+         1918  6.378049  1.369582
+         1919  7.075000  0.837802
+         1920  6.772093  1.615892
+         1921  6.926415  1.037962
+         1922  6.705769  1.288168
+         {\ldots}        {\ldots}       {\ldots}
+         1976  5.586917  1.635209
+         1977  5.732577  1.592237
+         1978  5.598851  1.691051
+         1979  5.545728  1.646573
+         1980  5.624816  1.566699
+         1981  5.680635  1.644565
+         1982  5.773295  1.689136
+         1983  5.667192  1.689251
+         1984  5.734579  1.687297
+         1985  5.664520  1.622313
+         1986  5.571970  1.590465
+         1987  5.552351  1.748379
+         1988  5.500424  1.649846
+         1989  5.540466  1.695604
+         1990  5.435150  1.678771
+         1991  5.749099  1.596515
+         1992  5.646203  1.605711
+         1993  5.593209  1.613735
+         1994  5.492077  1.696706
+         1995  5.739423  1.658678
+         1996  5.747122  1.651708
+         1997  5.393559  1.750001
+         1998  5.858182  1.573577
+         1999  5.637104  1.390383
+         2000  5.934424  1.559744
+         2001  6.101037  1.515299
+         2002  6.284317  1.509497
+         2003  6.347961  1.598427
+         2004  6.662005  1.732586
+         2005  6.512607  1.865310
+         
+         [113 rows x 2 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} 对原始数据进行重新组织或转换}
+         \PY{n}{imdb\PYZus{}ratings}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{imdb\PYZus{}ratings}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comedy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drama}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Documentary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Romance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 用一个单独的一列表示某个电影是不是属于某个特定的类型　用idxmax()命令来建立这个列　参数１表示众多列中的最大参数　０表示行最大的索引}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{genre}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 0       Comedy
+         1       Comedy
+         2    Animation
+         3       Comedy
+         4       Action
+         Name: genre, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}    Unnamed: 0                     title  year  length  budget  rating  votes  \textbackslash{}
+         0           1                         \$  1971     121     NaN     6.4    348   
+         1           2         \$1000 a Touchdown  1939      71     NaN     6.0     20   
+         2           3    \$21 a Day Once a Month  1941       7     NaN     8.2      5   
+         3           4                   \$40,000  1996      70     NaN     8.2      6   
+         4           5  \$50,000 Climax Show, The  1975      71     NaN     3.4     17   
+         
+              r1    r2   r3    {\ldots}       r10  mpaa  Action  Animation  Comedy  Drama  \textbackslash{}
+         0   4.5   4.5  4.5    {\ldots}       4.5   NaN       0          0       1      1   
+         1   0.0  14.5  4.5    {\ldots}      14.5   NaN       0          0       1      0   
+         2   0.0   0.0  0.0    {\ldots}      24.5   NaN       0          1       0      0   
+         3  14.5   0.0  0.0    {\ldots}      45.5   NaN       0          0       1      0   
+         4  24.5   4.5  0.0    {\ldots}      24.5   NaN       0          0       0      0   
+         
+            Documentary Romance  Short      genre  
+         0            0       0      0     Comedy  
+         1            0       0      0     Comedy  
+         2            0       0      1  Animation  
+         3            0       0      0     Comedy  
+         4            0       0      0     Action  
+         
+         [5 rows x 26 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} 自定义映射函数}
+         \PY{n}{genres\PYZus{}map} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comedy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drama}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Documentary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Romance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} 使用不同颜色表示不同类型}
+         \PY{n}{imdb\PYZus{}ratings}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre\PYZus{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{genre}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{genres\PYZus{}map}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{genre\PYZus{}color}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 0    yellow
+         1    yellow
+         2      blue
+         3    yellow
+         4       red
+         Name: genre\_color, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} 使用pivot\PYZus{}table命令将表格转置并进行一些统计计算}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{imdb\PYZus{}ratings}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 计算每个类型每年的平均评级}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} genre    Action  Animation    Comedy  Documentary     Drama   Romance
+         year                                                                 
+         1893   7.000000        NaN       NaN          NaN       NaN       NaN
+         1894   5.100000        NaN       NaN     4.720000       NaN       NaN
+         1895   5.700000        NaN       NaN     5.400000       NaN       NaN
+         1896   5.875000        NaN  3.900000     5.571429  2.100000       NaN
+         1897   5.900000        NaN  5.200000     4.300000       NaN       NaN
+         1898   6.000000        NaN  5.050000     5.500000  3.600000       NaN
+         1899   4.533333        NaN  3.600000     3.866667  4.850000       NaN
+         1900   5.625000   6.300000  5.250000     3.180000  5.000000       NaN
+         1901   4.375000        NaN  4.937500     4.314286  5.280000       NaN
+         1902   5.725000        NaN  5.600000     3.400000  3.200000       NaN
+         1903   4.600000        NaN  5.437500     4.625000  5.000000  4.600000
+         1904   3.748000        NaN  5.490000     3.800000  4.533333       NaN
+         1905   5.140000        NaN  4.883333     4.550000  5.425000       NaN
+         1906   6.460000   5.700000  6.000000     6.200000  4.340000       NaN
+         1907   5.275000   5.800000  5.266667          NaN  6.100000       NaN
+         1908   4.514286   5.900000  4.812500     7.200000  4.957143       NaN
+         1909   4.711111   3.600000  5.033333          NaN  5.542857       NaN
+         1910   5.250000        NaN  5.000000     6.000000  5.157143  4.900000
+         1911   5.350000   8.000000  5.850000     8.000000  5.923077  3.300000
+         1912   6.325000   8.400000  5.900000          NaN  6.550000  5.400000
+         1913   6.600000   7.700000  6.390000     5.800000  6.815385       NaN
+         1914   7.000000   8.600000  5.867568          NaN  6.258333       NaN
+         1915   6.150000   6.600000  6.180000     3.300000  6.585714       NaN
+         1916   7.000000   4.983333  6.717391          NaN  7.060000       NaN
+         1917   6.662500        NaN  6.811111          NaN  6.718182       NaN
+         1918   6.860000   4.666667  6.223810     6.300000  6.927273       NaN
+         1919   7.587500   6.533333  6.991667     7.200000  7.071429  6.400000
+         1920   6.841667        NaN  7.025000          NaN  6.236364       NaN
+         1921   6.900000   6.600000  7.091304          NaN  6.768421  7.000000
+         1922   6.575000   6.050000  7.035714     7.600000  6.600000  7.500000
+         {\ldots}         {\ldots}        {\ldots}       {\ldots}          {\ldots}       {\ldots}       {\ldots}
+         1976   5.283392   6.706667  5.367153     6.357143  5.934896  7.400000
+         1977   5.432685   6.725000  5.571756     6.259091  6.095580  5.900000
+         1978   5.264730   6.590000  5.451880     6.523529  5.816092  7.171429
+         1979   5.401992   6.594444  5.241259     6.395652  5.770157  5.266667
+         1980   5.433562   6.715385  5.271257     6.586207  6.082558  4.887500
+         1981   5.366409   7.300000  5.409938     6.281481  6.084375  6.200000
+         1982   5.429720   7.266667  5.464901     6.951429  6.158333  6.171429
+         1983   5.241026   6.360000  5.409740     6.541379  6.196635  6.022222
+         1984   5.296528   7.408000  5.629586     7.034091  5.932877  6.100000
+         1985   5.312874   6.712903  5.572487     6.446512  6.004891  6.218182
+         1986   5.182698   6.250000  5.324444     6.800000  6.147196  5.933333
+         1987   5.097389   6.858824  5.208036     7.020455  6.095865  5.183333
+         1988   5.023834   6.841667  5.264055     6.850000  6.035019  4.950000
+         1989   5.083173   6.957576  5.449000     6.805882  6.008065  5.753846
+         1990   4.894103   6.640000  5.291371     6.580556  6.141365  5.171429
+         1991   5.408358   6.566667  5.602283     6.495122  6.087398  6.027273
+         1992   5.214865   6.420690  5.347291     6.957353  6.071269  5.120000
+         1993   5.293462   6.556667  5.490667     6.382456  5.872792  4.825000
+         1994   4.972464   6.497436  5.436957     6.675000  5.921311  4.487500
+         1995   5.315851   6.778431  5.676613     6.666250  6.053043  5.484615
+         1996   5.370213   6.564000  5.742949     6.758065  5.965651  5.760000
+         1997   4.988493   5.506818  5.353719     6.068852  5.831450  5.313333
+         1998   5.520593   6.603509  5.840000     6.496032  6.056250  6.608333
+         1999   5.230909   6.031325  5.599409     6.236552  5.953229  5.940000
+         2000   5.549639   6.435897  5.843080     6.960759  6.109075  6.400000
+         2001   5.789863   6.446053  5.996154     6.910000  6.301007  5.610526
+         2002   6.003664   6.538961  6.156979     7.001852  6.396429  6.304000
+         2003   6.001812   6.816279  6.218230     7.093750  6.453375  6.217391
+         2004   6.371458   6.740385  6.452602     7.485366  6.747222  6.200000
+         2005   6.290385   6.511111  6.471818     7.224138  6.570213  7.033333
+         
+         [113 rows x 6 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{length}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fcfb1085d68>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{length}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 0        121
+         1         71
+         2          7
+         3         70
+         4         71
+         5         91
+         6         93
+         7         25
+         8         97
+         9         61
+         10        99
+         11        96
+         12        10
+         13        10
+         14       106
+         15       101
+         16       107
+         17        10
+         18       110
+         19         7
+         20        90
+         21        85
+         22        88
+         23        95
+         24        18
+         25        80
+         26         6
+         27        86
+         28        92
+         29         7
+                 {\ldots} 
+         58758     95
+         58759     90
+         58760     99
+         58761     88
+         58762     86
+         58763     90
+         58764     46
+         58765     86
+         58766     75
+         58767     80
+         58768     94
+         58769    101
+         58770     90
+         58771     89
+         58772      3
+         58773    120
+         58774     94
+         58775     17
+         58776      9
+         58777     78
+         58778     97
+         58779     20
+         58780     13
+         58781     87
+         58782     15
+         58783     98
+         58784    105
+         58785    100
+         58786    132
+         58787    101
+         Name: length, Length: 58788, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} 使用style.use()命令绘制一个视觉上优美的图像}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{length}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fcfb10068d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} 电影类型密度}
+         \PY{n}{plot1} \PY{o}{=} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{length}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{xlim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{,}\PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of Films by Runtime Minutes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.text.Text at 0x7fcfacc871d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 不同类型电影的评分情况}
+         \PY{n}{plot2} \PY{o}{=} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{xlim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ratings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distrubution of Ratings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <matplotlib.text.Text at 0x7fcfa49d6898>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{imdb\PYZus{}ratings}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{box}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} <matplotlib.text.Text at 0x7fcfa49f32e8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} 每个变量的边际图（单纬度分布）并与其他变量比价　以便发现数据集中不同列之间的关系 可通过内键scatter\PYZus{}matrix函数做到}
+         \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{imdb\PYZus{}ratings}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/kongweikun/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: FutureWarning: 'pandas.tools.plotting.scatter\_matrix' is deprecated, import 'pandas.plotting.scatter\_matrix' instead.
+  """Entry point for launching an IPython kernel.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa49e7048>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa48c5f28>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4a14278>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa47d2588>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4730128>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4730160>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa45fccc0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4577a58>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa455c4a8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa451a940>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa44a4f98>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4434710>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4370f98>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4352780>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa42bcf98>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa42a6358>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa42210f0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa4180b00>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa413af98>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa40cc630>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa40ddb70>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcf9fff2630>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcfa458e128>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcf9ff20f98>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fcf9fe84828>]], dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{fig}\PY{p}{,}\PY{n}{axes} \PY{o}{=}  \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{row} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{col} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{genre} \PY{o+ow}{in} \PY{n}{imdb\PYZus{}ratings}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{row} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{n}{row} \PY{o}{=} \PY{l+m+mi}{0} 
+                 \PY{n}{col} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{genre}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{n}{row}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{,}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{genre}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{genre}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre\PYZus{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                        \PY{n}{xlim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{,}\PY{n}{ylim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{n}{index}\PY{p}{)}
+             \PY{n}{row} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
