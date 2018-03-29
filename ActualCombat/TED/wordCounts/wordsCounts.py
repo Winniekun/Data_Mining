@@ -28,7 +28,6 @@ def write_file(frequent_words):
     with open('../../data/frequent.txt','a') as f:
         for word,score in frequent_words:
             f.write(word + '\n')
-    f.close(wordcloud.to_file('/home/kongweikun/PycharmProjects/Data_Mining/ActualCombat/TED/img/tedCloud.png'))
 
 
 if __name__ == '__main__':
