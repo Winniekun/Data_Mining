@@ -4,7 +4,8 @@
 @time: 18-3-28 下午7:24
 @contact: 836242657@qq.com
 '''
-txt_path = gb.glob('../../data/txt/*')
+import glob as gb
+txt_path = gb.glob('../../../data/txt/*')
 topic = 'technology'
 tecPath = []
 for i in txt_path:
@@ -14,7 +15,7 @@ for i in txt_path:
             tecPath.append(i)
         f.close()
 # print(tecPath)
-with open('../../data/year_tags_views.txt') as f:
+with open('../../../data/year_tags_views.txt') as f:
     row = f.readlines()
     row = [line.strip('\n') for line in row]
 fd = dict()

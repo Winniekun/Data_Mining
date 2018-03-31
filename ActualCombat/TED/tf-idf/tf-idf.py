@@ -66,7 +66,7 @@ def tfidf(txt):
 
 if __name__ == '__main__':
     import pyecharts
-    # base_path = '../../data/txt/'
+    base_path = '../../data/txt/'
     # ll = []
     # with open('../../data/top10.txt') as f:
     #     row = f.readlines()
