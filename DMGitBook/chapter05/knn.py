@@ -4,6 +4,7 @@
 @time: 18-4-2 下午2:29
 @contact: kongwiki@163.com
 '''
+import os
 import random
 
 def buckets(filename,bucketName,separator,classColumn):
@@ -16,7 +17,7 @@ def buckets(filename,bucketName,separator,classColumn):
     """
     numberOfBuckets = 10
     data = {}
-    
+
     #读取数据
     with open(filename) as f:
         lines = f.readlines()
@@ -45,9 +46,12 @@ def buckets(filename,bucketName,separator,classColumn):
 
     #写入文件
     for bNum in range(numberOfBuckets):
-        f = open("%s-%02i" % (bucketName, bNum + 1), 'w')
-        for item in buckets[bNum]:
-            f.write(item)
+        filepath = "%s-%02i.txt" % (bucketName, bNum + 1)
+        if not  os.path.exists(filepath):
+            os.system("touch {}".format(filepath))
+        with open("%s-%02i.txt" % (bucketName, bNum + 1), 'w') as f:
+            for item in buckets[bNum]:
+                f.write(item)
         f.close()
 
-buckets("pimaSmall.txt",'pimaSmall',',',8)
+buckets("../../data/DMGuideBook/knn/pimaSmall.txt",'/home/kongweikun/PycharmProjects/Data_Mining/data/DMGuideBook/knn/pimaSmall',',',8)
