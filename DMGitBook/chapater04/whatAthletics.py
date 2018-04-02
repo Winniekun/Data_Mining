@@ -19,7 +19,7 @@ class Classifier:
             vector = []
             for i in range(len(fields)):
                 if self.format[i] == 'num':
-                    vector.append(int(fields[i]))
+                    vector.append(int(float(fields[i])))
                 elif self.format[i] == 'comment':
                     ignore.append(fields[i])
                 elif self.format[i] == 'class':
@@ -85,6 +85,9 @@ def unitTest():
     filename = '../../data/DMGuideBook/sort/athletesTrainingSet.txt'
     classifier = Classifier(filename)
     print(classifier.medianAndDeviation)
+    a = [1,3,2,4,5]
+    m1 = classifier.getMedian(a)
+    assert (round(m1,3) == 3)
     print(classifier.classify([70,140]))
 
 def fileTest(training_filename,test_filename):
@@ -113,6 +116,6 @@ def fileTest(training_filename,test_filename):
     print("%4.2f%% correct" % (numCorrect * 100 / len(lines)))
 
 if __name__ == '__main__':
-    trainingfilename = '../../data/DMGuideBook/sort/athletesTrainingSet.txt'
-    testfilename = '../../data/DMGuideBook/sort/athletesTestSet.txt'
+    trainingfilename = '../../data/DMGuideBook/sort/irisTrainingSet.data'
+    testfilename = '../../data/DMGuideBook/sort/irisTestSet.data'
     fileTest(trainingfilename, testfilename)
