@@ -140,7 +140,6 @@ def generateRules():
     print("======")
     print("Association Rules:")
     print("======")
-
     # pull final list of tripletons to make the rules
     getFinalListQuery = "SELECT tag1, tag2, tag3, num_projs \
                    FROM ml.fc_project_tag_triples"
