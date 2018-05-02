@@ -49,8 +49,49 @@ def calcShannonEnt(dataSet):
         shannonEnt -= prob * log(prob, 2)  # 利用公式计算
     return shannonEnt  # 返回经验熵(香农熵)
 
+def splitDataSet(dataSet, axis, value):
+    """
+    按照给定特征划分数据集
+    :param dataSet: 划分的数据集
+    :param axis: 划分数据集的特征
+    :param value: 需要返回的特征的值
+    :return: None
+    """
+    retDataSet = []                                        #创建返回的数据集列表
+    for featVec in dataSet:                             #遍历数据集
+        if featVec[axis] == value:
+            reducedFeatVec = featVec[:axis]                #去掉axis特征
+            reducedFeatVec.extend(featVec[axis+1:])     #将符合条件的添加到返回的数据集
+            retDataSet.append(reducedFeatVec)
+    return retDataSet                                      #返回划分后的数据集
+
+def chooseBestFeatureToSplit(dataSet):
+    """
+    选择最优特征
+    :param dataSet: 数据集
+    :return: bestFeature: 信息增益最大的(最优)特征的索引值
+    """
+    numFeatures = len(dataSet[0]) - 1                    #特征数量
+    baseEntropy = calcShannonEnt(dataSet)                 #计算数据集的香农熵
+    bestInfoGain = 0.0                                  #信息增益
+    bestFeature = -1                                    #最优特征的索引值
+    for i in range(numFeatures):                         #遍历所有特征
+        #获取dataSet的第i个所有特征
+        featList = [example[i] for example in dataSet]
+        uniqueVals = set(featList)                         #创建set集合{},元素不可重复
+        newEntropy = 0.0                                  #经验条件熵
+        for value in uniqueVals:                         #计算信息增益
+            subDataSet = splitDataSet(dataSet, i, value)         #subDataSet划分后的子集
+            prob = len(subDataSet) / float(len(dataSet))           #计算子集的概率
+            newEntropy += prob * calcShannonEnt(subDataSet)     #根据公式计算经验条件熵
+        infoGain = baseEntropy - newEntropy                     #信息增益
+        print("第%d个特征的增益为%.3f" % (i, infoGain))            #打印每个特征的信息增益
+        if (infoGain > bestInfoGain):                             #计算信息增益
+            bestInfoGain = infoGain                             #更新信息增益，找到最大的信息增益
+            bestFeature = i                                     #记录信息增益最大的特征的索引值
+    return bestFeature                                             #返回信息增益最大的特征的索引值
 
 if __name__ == '__main__':
     dataSet, features = createDataSet()
-    print(dataSet)
-    print(calcShannonEnt(dataSet))
+    # print(calcShannonEnt(dataSet))
+    print("最优特征索引值:" + str(chooseBestFeatureToSplit(dataSet)))
