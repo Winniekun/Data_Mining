@@ -19,7 +19,7 @@ def content(name):
         return text
 text = content(name='frequent')
 
-backgroundImage =  np.array(Image.open("/home/kongweikun/PycharmProjects/Data_Mining/ActualCombat/TED/img/ted.png"))
+backgroundImage =  np.array(Image.open("/home/kongweikun/PycharmProjects/Data_Mining/InAction/TED/img/ted.png"))
 
 wordlist = jieba.cut(text,cut_all=False)
 #cut_all True 为全局模式 False为精准模式

@@ -28,7 +28,7 @@ for s in total:
 # print(y)
 import matplotlib.pyplot as plt
 plt.boxplot(y)
-plt.savefig('/home/kongweikun/PycharmProjects/Data_Mining/ActualCombat/TED/img/box.png')
+plt.savefig('/home/kongweikun/PycharmProjects/Data_Mining/InAction/TED/img/box.png')
 plt.show()
 # import pyecharts
 # scatter = pyecharts.Scatter('情感分析')

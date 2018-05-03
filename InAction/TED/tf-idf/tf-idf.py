@@ -96,7 +96,7 @@ if __name__ == '__main__':
             x.append(l[0])
             y.append(l[1])
     pie.add('',x,y,is_random=True,legend_pos='right',legend_orient='vertical',radius=[20,75],rosetype='radius')
-    pie.render('/home/kongweikun/PycharmProjects/Data_Mining/ActualCombat/TED/tf-idf/templates/{}.html'.format(0))
+    pie.render('/home/kongweikun/PycharmProjects/Data_Mining/InAction/TED/tf-idf/templates/{}.html'.format(0))
 
 
 
