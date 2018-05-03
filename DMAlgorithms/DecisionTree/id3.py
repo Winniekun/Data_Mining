@@ -7,6 +7,7 @@
 import operator
 from math import log
 
+# 创建测试数据集
 def createDataSet():
     """
     创建测试数据集
@@ -32,6 +33,7 @@ def createDataSet():
     labels = ['年龄', '有工作', '有自己的房子', '信贷情况']
     return dataSet, labels  # 返回数据集和分类属性
 
+# 计算经验熵
 def calcShannonEnt(dataSet):
     """
     计算给定数据集的经验熵
@@ -51,6 +53,7 @@ def calcShannonEnt(dataSet):
         shannonEnt -= prob * log(prob, 2)  # 利用公式计算
     return shannonEnt  # 返回经验熵(香农熵)
 
+# 划分数据集
 def splitDataSet(dataSet, axis, value):
     """
     按照给定特征划分数据集
@@ -67,6 +70,7 @@ def splitDataSet(dataSet, axis, value):
             retDataSet.append(reducedFeatVec)
     return retDataSet                                      #返回划分后的数据集
 
+# 选择最好的数据集划分方式
 def chooseBestFeatureToSplit(dataSet):
     """
     选择最优特征
@@ -93,6 +97,7 @@ def chooseBestFeatureToSplit(dataSet):
             bestFeature = i                                     #记录信息增益最大的特征的索引值
     return bestFeature                                             #返回信息增益最大的特征的索引值
 
+#
 def majorityCnt(classList):
     """
     统计classList中出现此处最多的元素(类标签)
@@ -106,6 +111,7 @@ def majorityCnt(classList):
     sortedClassCount = sorted(classCount.items(), key = operator.itemgetter(1), reverse = True)        #根据字典的值降序排序
     return sortedClassCount[0][0]
 
+# 创建决策树
 def createTree(dataSet, labels, featLabels):
     """
     创建决策树
@@ -147,6 +153,20 @@ def classify(inputTree, featLabels, testVec):
                 classLabel = classify(secondDict[key], featLabels, testVec)
             else: classLabel = secondDict[key]
     return classLabel
+
+
+def storeTree(inputTree, filename):
+    import pickle
+    fw = open(filename, 'w')
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+
 
 if __name__ == '__main__':
     dataSet, labels = createDataSet()
