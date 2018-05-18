@@ -85,7 +85,7 @@ def createTree(dataset,minSup=1):
             orderedItems = [v[0] for v in sorted(localD.items(),
                                                  key=lambda p:p[1],
                                                  reverse=True)]
-            print('整理之后的项集',orderedItems)
+            # print('整理之后的项集',orderedItems)
             updateTree(orderedItems,retTree,headerTable,count)
     return retTree,headerTable
 
@@ -98,8 +98,8 @@ def updateTree(items,inTree,headerTable,count):
     :type count:每个元素的次数 
     :rtype: 
     """
-    print('传入的项集',items)
-    inTree.disp()
+    # print('传入的项集',items)
+    # inTree.disp()
     # 判断第一个元素是否作为子节点存在
     if items[0] in inTree.children:
         inTree.children[items[0]].inc(count)
@@ -118,6 +118,37 @@ def updateHeader(nodeToTest,targetNode):
         nodeToTest = nodeToTest.nodeLink
     nodeToTest.nodeLink = targetNode
 
+def ascendTree(leafNode,prefixPath):
+    if leafNode.parent != None:
+        prefixPath.append(leafNode.name)
+        ascendTree(leafNode.parent,prefixPath)
+
+def findPrefixPath(basePat,treeNode):
+    condPats = {}
+    while treeNode != None:
+        prefixPath = []
+        ascendTree(treeNode,prefixPath)
+        if len(prefixPath) > 1:
+            condPats[frozenset(prefixPath[1:])] = treeNode.count
+        treeNode = treeNode.nodeLink
+    return condPats
+
+def mineTree(inTree, headerTable, minSup, preFix, freqItemList):
+    bigL = [v[0] for v in sorted(headerTable.items(),key=lambda p:p[0])]
+    # print(bigL)
+    for basePat in bigL:
+        newFreqSet = preFix.copy()
+        newFreqSet.add(basePat)
+        freqItemList.append(newFreqSet)
+        condPattBases = findPrefixPath(basePat,headerTable[basePat][1])
+        myCondTree, myHead = createTree(condPattBases,minSup)
+
+        if myHead != None:
+            print('conditional tree for: ',newFreqSet)
+            myCondTree.disp(1)
+            mineTree(myCondTree,myHead,minSup,newFreqSet,freqItemList)
+
+
 
 if __name__ == '__main__':
     # rootNode = treeNode('pyr',9,None)
@@ -135,5 +166,11 @@ if __name__ == '__main__':
     print('---------------------')
     initSet = createInitSet(simpDat)
     # print(initSet)
-    createTree(initSet,3)
+    tree,headerTable = createTree(initSet,3)
+    # print(headerTable['x'][1].disp())
+    # print(findPrefixPath('x',headerTable['x'][1]))
+    print('---------------------')
+    freqItems = []
+    print(mineTree(tree,headerTable,3,set([]),freqItems))
+
 
