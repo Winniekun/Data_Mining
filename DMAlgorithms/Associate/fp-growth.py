@@ -54,7 +54,7 @@ class treeNode:
 def createTree(dataset,minSup=1):
     """
     fp树构建
-    :param minSup: 最小支持度
+    :type minSup: 最小支持度
     :return: 
     """
     headerTable = {} # 头指针表
@@ -67,41 +67,54 @@ def createTree(dataset,minSup=1):
     for k in list(headerTable.keys()):
         if headerTable[k] < minSup:
             del (headerTable[k])
-    print(headerTable)
     freqItemSet = set(headerTable.keys())
     if not freqItemSet:
         return None,None
     for k in headerTable:
         headerTable[k] = [headerTable[k], None]
-        print(headerTable)
-    # retTree = treeNode('Null Set', 1, None)
-    # for tranSet, count in dataset.items():
-    #     localD = {}
-    #     for item in tranSet:
-    #         if item in freqItemSet:
-    #             localD[item] = headerTable[item][0]
-    #     if len(localD) > 0:
-    #         orderedItems = [v[0] for v in sorted(localD.items(),
-    #                                              key=lambda p:p[1],
-    #                                              reverse=True)]
-    #         updateTree(orderedItems,retTree,headerTable,count)
-    # return retTree,headerTable
+    # 创建根节点
+    retTree = treeNode('Null Set', 1, None)
+    for tranSet, count in dataset.items():
+        localD = {}
+        # 重新整理数据表 排除不符合频繁一项集的数据
+        for item in tranSet:
+            if item in freqItemSet:
+                localD[item] = headerTable[item][0]
+        # print('local',localD)
+        if len(localD) > 0:
+            orderedItems = [v[0] for v in sorted(localD.items(),
+                                                 key=lambda p:p[1],
+                                                 reverse=True)]
+            print('整理之后的项集',orderedItems)
+            updateTree(orderedItems,retTree,headerTable,count)
+    return retTree,headerTable
 
 def updateTree(items,inTree,headerTable,count):
+    """
+    更新树
+    :type items:项集 
+    :type inTree:目前的树 
+    :type headerTable:头指针表 
+    :type count:每个元素的次数 
+    :rtype: 
+    """
+    print('传入的项集',items)
+    inTree.disp()
+    # 判断第一个元素是否作为子节点存在
     if items[0] in inTree.children:
         inTree.children[items[0]].inc(count)
     else:
         inTree.children[items[0]] = treeNode(items[0],count,inTree)
-        if headerTable[items[0][1]] == None:
+        if headerTable[items[0]][1] == None:
             headerTable[items[0]][1] = inTree.children[items[0]]
         else:
-            updateTree(headerTable[items[0]][1],
+            updateHeader(headerTable[items[0]][1],
                        inTree.children[items[0]])
     if len(items) > 1:
         updateTree(items[1::],inTree.children[items[0]],headerTable,count)
 
 def updateHeader(nodeToTest,targetNode):
-    while(nodeToTest.targetNode != None):
+    while(nodeToTest.nodeLink != None):
         nodeToTest = nodeToTest.nodeLink
     nodeToTest.nodeLink = targetNode
 
