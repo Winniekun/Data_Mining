@@ -1,7 +1,9 @@
 #忽略文件
 .idea
-/data/*
+*.txt
+*.json
+*.zip
+
 /PredictiveAnalytics/.ipynb_checkpoints
-.*/data/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
