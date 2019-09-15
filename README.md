@@ -18,10 +18,11 @@
 
 ### Apriori
 
-[Apriori算法实现](http://www.kongwiki.top/2018/05/14/37/)
-
 ### 决策树
 
 #### ID3算法实现
 
 #### C4.5算法实现
+
+### Logistic回归
+
