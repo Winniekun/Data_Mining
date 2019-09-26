@@ -3,6 +3,7 @@
 *.txt
 *.json
 *.zip
+*.csv
 
 /PredictiveAnalytics/.ipynb_checkpoints
 .ipynb_checkpoints
