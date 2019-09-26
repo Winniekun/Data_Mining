@@ -2,7 +2,7 @@
 
 #### 流程图
 
-![image](/home/kongweikun/PycharmProjects/DataMining/pic/kmeans.png)
+![image](https://raw.githubusercontent.com/KongWiki/Data_Mining/master/pic/kmeans.png)
 
 **其步骤可简答的概括为**:
 
@@ -24,7 +24,14 @@
 
 #### 层次聚类
 
+* 待完成
+
 #### k-means
+
+* 已经完成
+  * [最基础版](https://github.com/KongWiki/Data_Mining/blob/master/DMAlgorithms/Cluster/kmeans.ipynb)
+  * [优化版](https://github.com/KongWiki/Data_Mining/blob/master/DMAlgorithms/Cluster/kmeans.py)
+* [讲解]([https://www.kongwiki.top/2019/08/24/k-means%e8%81%9a%e7%b1%bb%e7%ae%97%e6%b3%95/](https://www.kongwiki.top/2019/08/24/k-means聚类算法/))
 
 #### k-means优化--- k-means ++
 
@@ -35,3 +42,4 @@
 
 
  
+
