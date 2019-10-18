@@ -37,7 +37,15 @@
    1. 选取w0, b0
    2. 在训练集中选取数据(xi, yi)
    3. 如果yi(w\*x+b) ≤ 0
-   4. 
+      1. w <--- w+n\*yi\*xi
+      2. b <--- b + n\*yi
+   4.  转至2. 直至训练集中没有误分类点
+
+### 算法的收敛性
+
+### 算法流程图
+
+![感知机](https://raw.githubusercontent.com/KongWiki/cloudImg/master/统计学习方法-感知机-流程图.png)
 
 ## reference
 
