@@ -6,6 +6,8 @@
 """
 from math import log
 import operator
+import csv
+import numpy as np
 
 
 def createDataSet():
@@ -17,6 +19,20 @@ def createDataSet():
 	labels = ['no surfacing', 'flippers']
 	# change to discrete values
 	return dataSet, labels
+
+
+def createDataSetByFile():
+	reader = csv.reader(open("/home/kongweikun/PycharmProjects/DataMining/InAction/Bank/数字化之后的数据集.csv"))
+	header = next(reader)
+	dataSet = []
+	singRow = []
+	for row in reader:
+		singRow = [int(i) for i in row]
+		dataSet.append(singRow)
+	labels = header
+
+	return dataSet, labels
+
 
 ## 计算香农熵
 def calcShannonEnt(dataSet):
@@ -44,33 +60,46 @@ def splitDataSet(dataSet, axis, value):
 	return retDataSet
 
 
-def chooseBestFeatureToSplit(dataSet):
-	numFeatures = len(dataSet[0]) - 1  # the last column is used for the labels
-	baseEntropy = calcShannonEnt(dataSet)
-	bestInfoGain = 0.0;
+def chooseBestFeatureToSplit(dataSet, labels):
+	"""
+	选取当前迭代的最佳特征
+	:param dataSet:  去标签的数据集
+	:param labels:  标签
+	:return: 最佳特征名称, 对应的索引
+	"""
+	numFeatures = len(dataSet[0]) - 1  # 特征的数量-1
+	baseEntropy = calcShannonEnt(dataSet) # 计算香农熵
+	bestInfoGain = 0.0
 	bestFeature = -1
-	for i in range(numFeatures):  # iterate over all the features
-		featList = [example[i] for example in dataSet]  # create a list of all the examples of this feature
-		uniqueVals = set(featList)  # get a set of unique values
+	for i in range(numFeatures):  # 迭代
+		featList = [example[i] for example in dataSet]  # n*m的数组 储存特征
+		uniqueVals = set(featList)  # 去除重复
 		newEntropy = 0.0
 		for value in uniqueVals:
 			subDataSet = splitDataSet(dataSet, i, value)
 			prob = len(subDataSet) / float(len(dataSet))
 			newEntropy += prob * calcShannonEnt(subDataSet)
-		infoGain = baseEntropy - newEntropy  # calculate the info gain; ie reduction in entropy
-		if (infoGain > bestInfoGain):  # compare this to the best gain so far
-			bestInfoGain = infoGain  # if better than current best, set to best
+		infoGain = baseEntropy - newEntropy  # 计算信息增益
+		print("特征{}的信息增益为{}".format(labels[i],infoGain))
+		if (infoGain > bestInfoGain):  # 获取当前最好的特征
+			bestInfoGain = infoGain
 			bestFeature = i
-	return bestFeature  # returns an integer
+	print("当前选取的特征为{} 信息增益为{}".format(labels[bestFeature], bestInfoGain))
+	print("\n")
+	return labels[bestFeature] , bestFeature  # 返回特征名称
 
 
 def majorityCnt(classList):
+
 	classCount = {}
 	for vote in classList:
-		if vote not in classCount.keys(): classCount[vote] = 0
+		if vote not in classCount.keys():
+			classCount[vote] = 0
 		classCount[vote] += 1
-	sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
-	return sortedClassCount[0][0]
+	print(classCount)
+	# sortedClassCount = sorted(classCount, key=lambda x:x[1], reverse=True)
+	# print(classCount.values())
+	# return sortedClassCount[0][0]
 
 
 def createTree(dataSet, labels):
@@ -79,7 +108,7 @@ def createTree(dataSet, labels):
 		return classList[0]  # stop splitting when all of the classes are equal
 	if len(dataSet[0]) == 1:  # stop splitting when there are no more features in dataSet
 		return majorityCnt(classList)
-	bestFeat = chooseBestFeatureToSplit(dataSet)
+	bestFeat = chooseBestFeatureToSplit(dataSet, labels)[1]
 	bestFeatLabel = labels[bestFeat]
 	myTree = {bestFeatLabel: {}}
 	del (labels[bestFeat])

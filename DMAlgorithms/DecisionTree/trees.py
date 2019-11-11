@@ -5,6 +5,7 @@ Decision Tree Source Code for Machine Learning in Action Ch. 3
 '''
 from math import log
 import operator
+import csv
 
 def createDataSet():
     dataSet = [[1, 1, 'yes'],

@@ -240,7 +240,8 @@ def decision_tree(end_point):
         if label == "\"no\"" and res == "\"yes\"":
             c += 1
         if label == "\"no\"" and res == "\"no\"":
-            d += 1
+            d \
+                += 1
     print(a, " ", b, " ", c, " ", d, " ", a + b + c + d)
     print("Precision: ", float(a) / (a + c))
     print("Recall: ", float(a) / (a + b))
