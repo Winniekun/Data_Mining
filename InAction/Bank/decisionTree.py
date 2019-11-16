@@ -10,6 +10,7 @@ import csv
 import numpy as np
 
 
+# 测试数据
 def createDataSet():
 	dataSet = [[1, 1, 'yes'],
 			   [1, 1, 'yes'],
@@ -25,7 +26,6 @@ def createDataSetByFile():
 	reader = csv.reader(open("/home/kongweikun/PycharmProjects/DataMining/InAction/Bank/数字化之后的数据集.csv"))
 	header = next(reader)
 	dataSet = []
-	singRow = []
 	for row in reader:
 		singRow = [int(i) for i in row]
 		dataSet.append(singRow)
@@ -38,14 +38,14 @@ def createDataSetByFile():
 def calcShannonEnt(dataSet):
 	numEntries = len(dataSet)
 	labelCounts = {}
-	for featVec in dataSet:  # the the number of unique elements and their occurance
+	for featVec in dataSet:
 		currentLabel = featVec[-1]
 		if currentLabel not in labelCounts.keys(): labelCounts[currentLabel] = 0
 		labelCounts[currentLabel] += 1
 	shannonEnt = 0.0
 	for key in labelCounts:
 		prob = float(labelCounts[key]) / numEntries
-		shannonEnt -= prob * log(prob, 2)  # log base 2
+		shannonEnt -= prob * log(prob, 2) # 公式 具体公式详见<统计学习方法>
 	return shannonEnt
 
 
@@ -54,7 +54,7 @@ def splitDataSet(dataSet, axis, value):
 	retDataSet = []
 	for featVec in dataSet:
 		if featVec[axis] == value:
-			reducedFeatVec = featVec[:axis]  # chop out axis used for splitting
+			reducedFeatVec = featVec[:axis]
 			reducedFeatVec.extend(featVec[axis + 1:])
 			retDataSet.append(reducedFeatVec)
 	return retDataSet
