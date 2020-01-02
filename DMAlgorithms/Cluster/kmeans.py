@@ -6,7 +6,7 @@
 """
 import math
 import random
-
+from  sklearn.neighbors import KNeighborsClassifier
 
 def getMedian(alist):
 	"""
